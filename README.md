@@ -1,1 +1,1 @@
-redme for monty project
+readme for monty project

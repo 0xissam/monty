@@ -1,24 +1,40 @@
 #include "monty.h"
+/**
+ * _mode -  aswitch the er rgdgd mode queue/stack
+ * @top: head of double dfg list
+ * @line_number: line  dfgdfg number of opcode
+ * Return: none df
+ */
+void _mode(stack_t **top, unsigned int line_number)
+{
+	(void)top;
+	(void)line_number;
+
+	if (strcmp(datax.opcode, "queue") == 0)
+		datax.mode = 1;
+	else if (strcmp(datax.opcode, "stack") == 0)
+		datax.mode = 0;
+}
 
 /**
- * _n_node -  adds a new node at the beginning
- * @top: head for the double list
- * @l_num: line num for the opcode
- * Return: nothing
+ * _push -  adds a new dfg node at the beginning
+ * @top: head of double  dgfdg list
+ * @line_number: line number sdrt of opcode
+ * Return: none srt
  */
-void _n_node(stack_t **top, unsigned int l_num)
+void _push(stack_t **top, unsigned int line_number)
 {
 	stack_t *new, *last;
 	int i = 0;
 
-	(void)l_num;
+	(void)line_number;
 	if (!top)
 		return;
 	new = malloc(sizeof(stack_t));
 	if (!new)
 	{
 		fprintf(stderr, "Error: malloc failed");
-		free_st(datax.top);
+		free_stack(datax.top);
 		exit(EXIT_FAILURE);
 	}
 	new->n = datax.push_value;
@@ -50,54 +66,17 @@ void _n_node(stack_t **top, unsigned int l_num)
 }
 
 /**
- * _mode_switch -  switch the mode
- * @top: head of double list
- * @l_num: line number for opcode
- * Return: nothing
+ * _pall -  prints all the elements of a asd dlistint_t list
+ * @top: head of double list sfgr
+ * @line_number: line number of sdf opcode
+ * Return: nonea
  */
-void _mode_switch(stack_t **top, unsigned int l_num)
-{
-	(void)top;
-	(void)l_num;
-
-	if (strcmp(datax.opcode, "queue") == 0)
-		datax.mode = 1;
-	else if (strcmp(datax.opcode, "stack") == 0)
-		datax.mode = 0;
-}
-
-
-
-/**
- * _print_tofs -  print the value at the top stack
- * @top: head of double list
- * @l_num: line num for the opcode
- * Return: nothing
- */
-void _print_tofs(stack_t **top, unsigned int l_num)
-{
-	if (!*top)
-	{
-		fprintf(stderr, "L%d: can't pint, stack empty\n", l_num);
-		free_st(datax.top);
-		exit(EXIT_FAILURE);
-	}
-	fprintf(stdout, "%d\n", (*top)->n);
-	fflush(stdout);
-}
-
-/**
- * _printer -  print all the elements for the dlistint_t list
- * @top: head for the double list
- * @l_num: line num for the opcode
- * Return: nothing
- */
-void _printer(stack_t **top, unsigned int l_num)
+void _pall(stack_t **top, unsigned int line_number)
 {
 	stack_t *current = *top;
 	int i;
 
-	(void)l_num;
+	(void)line_number;
 	for (i = 0; current; i++)
 	{
 		fprintf(stdout, "%d\n", current->n);
@@ -107,18 +86,36 @@ void _printer(stack_t **top, unsigned int l_num)
 }
 
 /**
- * _rm_tofs - removes the top element of the stack
- * @top: head of double list
- * @l_num: line number for the opcode
- * Return: nothing
+ * _pint -  dsfs prints the value at the top of the stack
+ * @top: head sfd of double list
+ * @line_number: rrty line number of opcode
+ * Return: none a
  */
-void _rm_tofs(stack_t **top, unsigned int l_num)
+void _pint(stack_t **top, unsigned int line_number)
+{
+	if (!*top)
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+		free_stack(datax.top);
+		exit(EXIT_FAILURE);
+	}
+	fprintf(stdout, "%d\n", (*top)->n);
+	fflush(stdout);
+}
+
+/**
+ * _pop - removes sdf the top element of the stack
+ * @top: head of uio double list
+ * @line_number: uo line number of opcode
+ * Return: none uo
+ */
+void _pop(stack_t **top, unsigned int line_number)
 {
 
 	if (!*top)
 	{
-		fprintf(stderr, "L%d: can't pop an empty stack\n", l_num);
-		free_st(datax.top);
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
+		free_stack(datax.top);
 		exit(EXIT_FAILURE);
 	}
 	if ((*top)->next == NULL)
@@ -135,19 +132,19 @@ void _rm_tofs(stack_t **top, unsigned int l_num)
 }
 
 /**
- * _swap - swaps the top two elements of the stack.
- * @top: head for the double list
- * @l_num: line num of opcode
- * Return: nothing
+ * _swap - swaps yutyu the top two elements of the stack.
+ * @top: head of dfgd double list
+ * @line_number: fdgdfg line number of opcode
+ * Return: noned
  */
-void _swap(stack_t **top, unsigned int l_num)
+void _swap(stack_t **top, unsigned int line_number)
 {
 	stack_t *tmp1;
 
 	if (!*top || (*top)->next == NULL)
 	{
-		fprintf(stderr, "L%d: can't swap, stack too short\n", l_num);
-		free_st(datax.top);
+		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
+		free_stack(datax.top);
 		exit(EXIT_FAILURE);
 	}
 	tmp1 = *top;
@@ -165,173 +162,172 @@ void _swap(stack_t **top, unsigned int l_num)
 }
 
 /**
- * _add - adds the top two elements of the stack.
- * @top: head of double list
- * @l_num: line number for the opcode
- * Return: nothing
+ * _add - adds the  fdg top two elements of the stack.
+ * @top: head of uyiyu double list
+ * @line_number: uyiyi line number of opcode
+ * Return: none g
  */
-void _add(stack_t **top, unsigned int l_num)
+void _add(stack_t **top, unsigned int line_number)
 {
 	int value = 0;
 
 	if (!*top || (*top)->next == NULL)
 	{
-		fprintf(stderr, "L%d: can't add, stack too short\n", l_num);
-		free_st(datax.top);
+		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+		free_stack(datax.top);
 		exit(EXIT_FAILURE);
 	}
 	value = (*top)->n;
-	_rm_tofs(&datax.top, datax.line_num);
+	_pop(&datax.top, datax.line_num);
 	(*top)->n += value;
 }
 
+/**
+ * _nop - doesn’t tyut do anything.
+ * @top: head of  tryrty double list
+ * @line_number:  oipi line number of opcode
+ * Return: nonef
+ */
+void _nop(stack_t **top, unsigned int line_number)
+{
+	(void)top;
+	(void)line_number;
+}
 
 /**
- * _sub - subtracts the top element of the stack
- *  from the second top element of the stack.
- * @top: head of double list
- * @l_num: line num for opcode
- * Return: nothing
+ * _sub - subtracts jiok the top element of the stack
+ *  from the second kpokp top element of the stack.
+ * @top: head of double plo list
+ * @line_number: lineop number of opcode
+ * Return: noneu
  */
-void _sub(stack_t **top, unsigned int l_num)
+void _sub(stack_t **top, unsigned int line_number)
 {
 	int value = 0;
 
 	if (!*top || (*top)->next == NULL)
 	{
-		fprintf(stderr, "L%d: can't sub, stack too short\n", l_num);
-		free_st(datax.top);
+		fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
+		free_stack(datax.top);
 		exit(EXIT_FAILURE);
 	}
 	value = (*top)->n;
-	_rm_tofs(&datax.top, datax.line_num);
+	_pop(&datax.top, datax.line_num);
 	(*top)->n -= value;
 }
 
 /**
- * _nothing - do anything.
- * @top: head of double list
- * @l_num: line number of opcode
- * Return: nothing
+ * _div - divides ioj the second top element of
+ * the stack by the --o top element of the stack.
+ * @top: head of double uoiy list
+ * @line_number: line rwqa number of opcode
+ * Return: none
  */
-void _nothing(stack_t **top, unsigned int l_num)
-{
-	(void)top;
-	(void)l_num;
-}
-
-/**
- * _div - divides the second top element of
- * the stack by the top element of the stack.
- * @top: head of double list
- * @l_num: line num of opcode
- * Return: nothing
- */
-void _div(stack_t **top, unsigned int l_num)
+void _div(stack_t **top, unsigned int line_number)
 {
 	int value = 0;
 
 	if (!*top || (*top)->next == NULL)
 	{
-		fprintf(stderr, "L%d: can't div, stack too short\n", l_num);
-		free_st(datax.top);
+		fprintf(stderr, "L%d: can't div, stack too short\n", line_number);
+		free_stack(datax.top);
 		exit(EXIT_FAILURE);
 	}
 	if ((*top)->n == 0)
 	{
-		fprintf(stderr, "L%d: division by zero\n", l_num);
-		free_st(datax.top);
+		fprintf(stderr, "L%d: division by zero\n", line_number);
+		free_stack(datax.top);
 		exit(EXIT_FAILURE);
 	}
 	value = (*top)->n;
-	_rm_tofs(&datax.top, datax.line_num);
+	_pop(&datax.top, datax.line_num);
 	(*top)->n /= value;
 }
 
 /**
- * _mod - computes the rest of the division for second
- *  top element of the stack by the top element of the stack.
- * @top: head of double list
- * @l_num: line num for the opcode
- * Return: nothing
+ * _mul - multiplies esres the second top element
+ * of the stack with ress the top element of the stack.
+ * @top: head of edrd double list
+ * @line_number: xrer line number of opcode
+ * Return: nonet
  */
-void _mod(stack_t **top, unsigned int l_num)
+void _mul(stack_t **top, unsigned int line_number)
 {
 	int value = 0;
 
 	if (!*top || (*top)->next == NULL)
 	{
-		fprintf(stderr, "L%d: can't mod, stack too short\n", l_num);
-		free_st(datax.top);
-		exit(EXIT_FAILURE);
-	}
-	if ((*top)->n == 0)
-	{
-		fprintf(stderr, "L%d: division by zero\n", l_num);
-		free_st(datax.top);
+		fprintf(stderr, "L%d: can't mul, stack too short\n", line_number);
+		free_stack(datax.top);
 		exit(EXIT_FAILURE);
 	}
 	value = (*top)->n;
-	_rm_tofs(&datax.top, datax.line_num);
-	(*top)->n %= value;
-}
-
-/**
- * _mul - multiplies the second top element
- * of the stack with the top element of the stack.
- * @top: head of double list
- * @l_num: line num for the opcode
- * Return: nothing
- */
-void _mul(stack_t **top, unsigned int l_num)
-{
-	int value = 0;
-
-	if (!*top || (*top)->next == NULL)
-	{
-		fprintf(stderr, "L%d: can't mul, stack too short\n", l_num);
-		free_st(datax.top);
-		exit(EXIT_FAILURE);
-	}
-	value = (*top)->n;
-	_rm_tofs(&datax.top, datax.line_num);
+	_pop(&datax.top, datax.line_num);
 	(*top)->n *= value;
 }
 
 /**
- * _pchar - prints the char at the top of the stack (ascii).
- * @top: head of double list
- * @l_num: line num for the opcode
- * Return: nothing
+ * _mod - computes rdtr the rest of the division of the second
+ *  top element ofgythe stack by the top element of the stack.
+ * @top: head of yugu double list
+ * @line_number: tfy line number of opcode
+ * Return: nonet
  */
-void _pchar(stack_t **top, unsigned int l_num)
+void _mod(stack_t **top, unsigned int line_number)
+{
+	int value = 0;
+
+	if (!*top || (*top)->next == NULL)
+	{
+		fprintf(stderr, "L%d: can't mod, stack too short\n", line_number);
+		free_stack(datax.top);
+		exit(EXIT_FAILURE);
+	}
+	if ((*top)->n == 0)
+	{
+		fprintf(stderr, "L%d: division by zero\n", line_number);
+		free_stack(datax.top);
+		exit(EXIT_FAILURE);
+	}
+	value = (*top)->n;
+	_pop(&datax.top, datax.line_num);
+	(*top)->n %= value;
+}
+
+/**
+ * _pchar - prints tfy the char at the top of the stack (ascii).
+ * @top: head of ojjo double list
+ * @line_number:  iojoline number of opcode
+ * Return: none
+ */
+void _pchar(stack_t **top, unsigned int line_number)
 {
 	if (!*top)
 	{
-		fprintf(stderr, "L%d: can't pchar, stack empty\n", l_num);
-		free_st(datax.top);
+		fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
+		free_stack(datax.top);
 		exit(EXIT_FAILURE);
 	}
 	if ((*top)->n > 127 || (*top)->n < 0)
 	{
-		fprintf(stderr, "L%d: can't pchar, value out of range\n", l_num);
-		free_st(datax.top);
+		fprintf(stderr, "L%d: can't pchar, value out of range\n", line_number);
+		free_stack(datax.top);
 		exit(EXIT_FAILURE);
 	}
 	printf("%c\n", (*top)->n);
 }
 
 /**
- * _pstr - prints the string starting at the top of the stack.
- * @top: head of double list
- * @l_num: line num for the opcode
- * Return: nothing
+ * _pstr - prints yui the string starting at the top of the stack.
+ * @top: head of iuiouo double list
+ * @line_number: opokp line number of opcode
+ * Return: none j
  */
-void _pstr(stack_t **top, unsigned int l_num)
+void _pstr(stack_t **top, unsigned int line_number)
 {
 	stack_t *current = *top;
 	int i;
-	(void)l_num;
+	(void)line_number;
 
 	for (i = 0; current && current->n != 0 &&
 				!(current->n > 127 || current->n < 0);
@@ -344,46 +340,19 @@ void _pstr(stack_t **top, unsigned int l_num)
 }
 
 /**
- * _rotb - rotates the stack to the bottom.
- * @top: head of double list
- * @l_num: line num for the opcode
- * Return: nothing
+ * _rotl -  rotatesjoi  the stack to the top.
+ * @top: head of 
+ * @line_number: line number uii of opcode
+ * Return: none
  */
-void _rotb(stack_t **top, unsigned int l_num)
-{
-	stack_t *last = *top;
-	int i;
-
-	if (!*top || (*top)->next == NULL)
-		return;
-	(void)l_num;
-	for (i = 0; last; i++)
-	{
-		if (!last->next)
-			break;
-		last = last->next;
-	}
-	last->next = *top;
-	last->prev->next = NULL;
-	(*top)->prev = last;
-	(*top) = last;
-	last->prev = NULL;
-}
-
-/**
- * _rott -  rotates the stack to the top.
- * @top: head of double list
- * @l_num: line num for the opcode
- * Return: nothing
- */
-void _rott(stack_t **top, unsigned int l_num)
+void _rotl(stack_t **top, unsigned int line_number)
 {
 	stack_t *last = *top;
 	int i;
 
 	if (!*top)
 		return;
-	(void)l_num;
+	(void)line_number;
 	for (i = 0; last; i++)
 	{
 		if (!last->next)
@@ -395,4 +364,31 @@ void _rott(stack_t **top, unsigned int l_num)
 	(*top) = (*top)->next;
 	(*top)->prev->next = NULL;
 	(*top)->prev = NULL;
+}
+
+/**
+ * _rotr - rotates the uhiujo stack to the bottom.
+ * @top: head of doublehiui list
+ * @line_number: lineuijo number of opcode
+ * Return: none
+ */
+void _rotr(stack_t **top, unsigned int line_number)
+{
+	stack_t *last = *top;
+	int i;
+
+	if (!*top || (*top)->next == NULL)
+		return;
+	(void)line_number;
+	for (i = 0; last; i++)
+	{
+		if (!last->next)
+			break;
+		last = last->next;
+	}
+	last->next = *top;
+	last->prev->next = NULL;
+	(*top)->prev = last;
+	(*top) = last;
+	last->prev = NULL;
 }

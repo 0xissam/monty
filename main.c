@@ -1,29 +1,29 @@
 #include "monty.h"
 
 /**
- * exec - exec opcode
- * Return: nothing
+ * exec - exec opcodedfsfsf dsf
+ * Return: none sdf
  */
 void exec(void)
 {
 	instruction_t ins[] = {
-		{"push", _n_node},
-		{"pall", _printer},
-		{"pint", _print_tofs},
-		{"pop", _rm_tofs},
+		{"push", _push},
+		{"pall", _pall},
+		{"pint", _pint},
+		{"pop", _pop},
 		{"swap", _swap},
 		{"add", _add},
-		{"nop", _nothing},
+		{"nop", _nop},
 		{"sub", _sub},
 		{"div", _div},
 		{"mul", _mul},
 		{"mod", _mod},
 		{"pchar", _pchar},
 		{"pstr", _pstr},
-		{"rotl", _rott},
-		{"rotr", _rotb},
-		{"queue", _mode_switch},
-		{"stack", _mode_switch},
+		{"rotl", _rotl},
+		{"rotr", _rotr},
+		{"queue", _mode},
+		{"stack", _mode},
 		{NULL, NULL},
 	};
 	int j = 0;
@@ -40,14 +40,14 @@ void exec(void)
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n",
 				datax.line_num, datax.opcode);
-		free_st(datax.top);
+		free_stack(datax.top);
 		exit(EXIT_FAILURE);
 	}
 }
 /**
- * remove_spaces - rm spaces
- * @str: string
- * Return: new string
+ * remove_spaces sdufhis ijsif - remove spaces
+ * @str: stringhusdf iu
+ * Return: new stringuhdsf
  */
 char *remove_spaces(char *str)
 {
@@ -62,10 +62,10 @@ char *remove_spaces(char *str)
 }
 
 /**
- * main -  count charachter in number
- * @argc: number
- * @argv: number
- * Return: number lentgh
+ * main -  count howjfoisdfo many jsidfcharachter in number
+ * @argc: numberdd
+ * @argv: numberyrty
+ * Return: the number lentgh dshfiu
  */
 int main(int argc, char **argv)
 {
@@ -78,7 +78,7 @@ int main(int argc, char **argv)
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	datax.mfile = openf(argv[1]);
+	datax.mfile = openfile(argv[1]);
 	while (fgets(line, sizeof(line), datax.mfile) != NULL)
 	{
 		if (strlen(remove_spaces(line)) < 3 || remove_spaces(line)[0] == '#')
@@ -95,17 +95,17 @@ int main(int argc, char **argv)
 			if (strcmp(datax.opcode, "push") != 0)
 				break;
 			if (i == 1)
-				verify_n(token);
+				verify_number(token);
 			token = strtok(NULL, " \n");
 		}
 		if (strcmp(datax.opcode, "push") == 0 && i == 1)
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", datax.line_num);
-			free_st(datax.top);
+			free_stack(datax.top);
 			exit(EXIT_FAILURE);
 		}
 		exec();
 	}
-	free_st(datax.top);
+	free_stack(datax.top);
 	exit(EXIT_SUCCESS);
 }
